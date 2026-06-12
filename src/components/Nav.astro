@@ -1,0 +1,129 @@
+---
+import Wordmark from "./Wordmark.astro";
+
+type Props = {
+  variant?: "home" | "contact";
+};
+
+const { variant = "home" } = Astro.props;
+---
+
+<nav class="yc-nav" data-variant={variant} aria-label="Primary">
+  <div class="yc-nav__row">
+    <a href="/" class="yc-nav__logo" aria-label="Y&C home">
+      <Wordmark height={24} />
+    </a>
+
+    {
+      variant === "home" && (
+        <div class="yc-nav__right">
+          <div class="yc-nav__links" data-navlinks>
+            <a href="/#services">Services</a>
+            <a href="/#why">Why Y&amp;C</a>
+            <a href="/#faqs">FAQs</a>
+          </div>
+          <a href="/contact" class="yc-nav__cta">Let&rsquo;s chat</a>
+        </div>
+      )
+    }
+  </div>
+</nav>
+
+<style>
+  .yc-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    height: 64px;
+    transition: box-shadow var(--tx-fast);
+  }
+
+  .yc-nav[data-scrolled="true"] {
+    box-shadow: var(--shadow-nav);
+  }
+
+  .yc-nav__row {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .yc-nav__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-charcoal);
+  }
+
+  .yc-nav__right {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 36px);
+  }
+
+  .yc-nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 36px);
+  }
+
+  .yc-nav__links a {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+    text-decoration: none;
+    transition: color var(--tx-fast);
+  }
+
+  .yc-nav__links a:hover {
+    color: var(--color-charcoal);
+  }
+
+  @media (max-width: 767px) {
+    .yc-nav__links {
+      display: none;
+    }
+  }
+
+  .yc-nav__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    background: var(--color-charcoal);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: var(--radius-button);
+    text-decoration: none;
+    box-shadow: var(--shadow-button);
+    transition: background var(--tx-fast);
+  }
+
+  .yc-nav__cta:hover {
+    background: var(--color-charcoal-hover);
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>(".yc-nav");
+  if (nav) {
+    const sync = () => {
+      nav.dataset.scrolled = window.scrollY > 40 ? "true" : "false";
+    };
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+  }
+</script>

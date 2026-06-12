@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Design tokens — sourced verbatim from the design handoff README.
+   See _handoff/design_handoff_yc_property_site/README.md §"Design Tokens". */
+@theme {
+  --color-manilla: #FCE7C3;
+  --color-manilla-hover: #f3dcae;
+  --color-charcoal: #2B2A35;
+  --color-charcoal-hover: #545465;
+  --color-muted: #7A7E8C;
+  --color-faint: #A6ABBA;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F2F4F7;
+  --color-border: #DDE3EA;
+  --color-link: #0A6CFF;
+  --color-error: #D9534F;
+  --color-success: #1FA463;
+
+  --font-display: "Lora", Georgia, serif;
+  --font-sans: "Inter", Arial, sans-serif;
+
+  --radius-button: 6px;
+  --radius-input: 8px;
+  --radius-card: 12px;
+  --radius-form: 16px;
+  --radius-pill: 100px;
+}
+
+:root {
+  /* Fluid type scale */
+  --text-h1-home: clamp(40px, 7vw, 68px);
+  --text-h1-contact: clamp(34px, 5.5vw, 52px);
+  --text-h2: clamp(30px, 4.5vw, 40px);
+  --text-h2-cta: clamp(30px, 5vw, 48px);
+  --text-h3: 23px;
+  --text-faq-q: 19px;
+  --text-stat: clamp(34px, 5vw, 48px);
+  --text-lead: clamp(17px, 2.2vw, 19px);
+
+  /* Spacing */
+  --pad-section: clamp(56px, 9vw, 96px);
+  --pad-section-dark: clamp(56px, 9vw, 104px);
+  --pad-x: clamp(20px, 5vw, 80px);
+  --content-max: 1200px;
+  --prose-max: 680px;
+  --form-col: 760px;
+
+  /* Shadows */
+  --shadow-card-hover: 0 6px 24px rgba(43, 42, 53, 0.14);
+  --shadow-form-card: 0 8px 30px rgba(43, 42, 53, 0.06);
+  --shadow-nav: 0 2px 12px rgba(43, 42, 53, 0.08);
+  --shadow-button: 0 1px 4px rgba(43, 42, 53, 0.2);
+
+  /* Motion */
+  --tx-fast: 150ms ease;
+  --tx-slow: 200ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-manilla);
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-charcoal);
+  color: var(--color-manilla);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

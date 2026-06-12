@@ -1,0 +1,92 @@
+---
+import Site from "../layouts/Site.astro";
+---
+
+<Site
+  title="Contact — Y&C"
+  description="Get in touch with Y&C. We reply within one business day to enquiries from Australian property businesses."
+  navVariant="contact"
+>
+  <main class="contact">
+    <div class="contact__inner">
+      {/* Left column — handoff README §"Contact — Layout" */}
+      <section class="contact__intro">
+        <p class="eyebrow">Get in touch</p>
+        <h1 class="display-h1">Let&rsquo;s build something that brings in business</h1>
+        <p class="lead">
+          Tell us about your business and what you&rsquo;re hoping to achieve. We reply within one business day.
+        </p>
+        <p style="margin-top:2rem;color:var(--color-charcoal-hover)">
+          <em>Foundation scaffold — alternate contact rows + status pill land in the next pass.</em>
+        </p>
+      </section>
+
+      {/* Right column — EnquiryForm island lands in the next pass */}
+      <section class="contact__form-stub" aria-label="Enquiry form (coming next)">
+        <p>Enquiry form will mount here. Endpoint already wired at <code>/api/enquiry</code>.</p>
+      </section>
+    </div>
+  </main>
+</Site>
+
+<style>
+  .contact {
+    background: var(--color-manilla);
+    padding: clamp(56px, 9vw, 96px) var(--pad-x);
+    min-height: calc(100vh - 64px);
+  }
+
+  .contact__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(40px, 7vw, 80px);
+    align-items: start;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 24px;
+  }
+
+  .display-h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h1-contact);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 24px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    font-size: var(--text-lead);
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 32px;
+  }
+
+  .contact__form-stub {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-form);
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: var(--shadow-form-card);
+    color: var(--color-charcoal-hover);
+    font-size: 15px;
+  }
+
+  .contact__form-stub code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    background: var(--color-surface-alt);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+</style>

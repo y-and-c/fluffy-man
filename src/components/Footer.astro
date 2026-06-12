@@ -1,0 +1,65 @@
+---
+import Wordmark from "./Wordmark.astro";
+---
+
+<footer class="yc-footer">
+  <div class="yc-footer__row">
+    <a href="/" class="yc-footer__logo" aria-label="Y&C home">
+      <Wordmark height={20} />
+    </a>
+    <nav class="yc-footer__links" aria-label="Footer">
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <span class="yc-footer__meta">&copy; 2026 Y&amp;C</span>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .yc-footer {
+    background: var(--color-charcoal);
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: clamp(32px, 5vw, 48px) var(--pad-x);
+  }
+
+  .yc-footer__row {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .yc-footer__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .yc-footer__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 32px);
+  }
+
+  .yc-footer__links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    transition: color var(--tx-fast);
+  }
+
+  .yc-footer__links a:hover {
+    color: var(--color-manilla);
+  }
+
+  .yc-footer__meta {
+    font-size: 13px;
+    color: var(--color-faint);
+  }
+</style>
