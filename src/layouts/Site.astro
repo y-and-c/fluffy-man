@@ -10,6 +10,8 @@ type Props = {
 };
 
 const { title, description, navVariant = "home" } = Astro.props;
+
+const GTM_ID = "GTM-K3SMX3B6";
 ---
 
 <!doctype html>
@@ -17,6 +19,22 @@ const { title, description, navVariant = "home" } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Google Tag Manager */}
+    <script is:inline define:vars={{ GTM_ID }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", GTM_ID);
+    </script>
+    {/* End Google Tag Manager */}
+
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -33,6 +51,16 @@ const { title, description, navVariant = "home" } = Astro.props;
     />
   </head>
   <body>
+    {/* Google Tag Manager (noscript) */}
+    <noscript
+      ><iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    {/* End Google Tag Manager (noscript) */}
+
     <Nav variant={navVariant} />
     <slot />
     <Footer />
