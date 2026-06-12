@@ -1,0 +1,155 @@
+---
+// Why Y&C — handoff README §"Homepage — Why Y&C"
+import Ampersand from "./Ampersand.astro";
+
+const stats = [
+  { value: "100%", label: "Focused on property businesses" },
+  { value: "4–6 wk", label: "Typical launch timeline" },
+  { value: "1 day", label: "Average reply time" },
+  { value: "AU", label: "Agents, developers & construction" },
+];
+---
+
+<section id="why" class="why">
+  <div class="why__inner">
+    <div class="why__left">
+      <div class="why__chip" aria-hidden="true">
+        <Ampersand width={15} />
+      </div>
+      <p class="eyebrow">Why Y&amp;C</p>
+      <h2 class="h2">We only work with property businesses</h2>
+      <p class="why__body">
+        That means we understand the sales cycle, the compliance requirements,
+        and what an owner, buyer or tenant actually needs to see before they
+        pick up the phone.
+      </p>
+      <a class="btn btn--ghost-dark" href="/contact">Book a free call</a>
+    </div>
+
+    <div class="why__right">
+      <div class="stats">
+        {
+          stats.map((s) => (
+            <div class="stat">
+              <div class="stat__value">{s.value}</div>
+              <div class="stat__label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    background: var(--color-charcoal);
+    color: #fff;
+    padding: clamp(64px, 9vw, 104px) var(--pad-x);
+    scroll-margin-top: 64px;
+  }
+
+  .why__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(40px, 7vw, 80px);
+    align-items: center;
+  }
+
+  .why__chip {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+    margin: 0 0 16px;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  .why__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 32px;
+    max-width: 460px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12.5px 26px;
+    border-radius: var(--radius-button);
+    text-decoration: none;
+    transition:
+      background var(--tx-fast),
+      color var(--tx-fast),
+      border-color var(--tx-fast);
+  }
+
+  .btn--ghost-dark {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid #fff;
+  }
+
+  .btn--ghost-dark:hover {
+    background: #fff;
+    color: var(--color-charcoal);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .stat {
+    background: var(--color-charcoal);
+    padding: clamp(24px, 4vw, 36px);
+  }
+
+  .stat__value {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-stat);
+    line-height: 1;
+    color: var(--color-manilla);
+    margin: 0 0 10px;
+  }
+
+  .stat__label {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-faint);
+  }
+</style>

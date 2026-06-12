@@ -1,0 +1,162 @@
+---
+// Services — handoff README §"Homepage — Services"
+const services = [
+  {
+    icon: "🎯",
+    title: "Lead-gen landing pages",
+    body:
+      "Fast, conversion-focused pages for campaigns, new developments, or individual listings.",
+  },
+  {
+    icon: "🏢",
+    title: "Agency & company websites",
+    body:
+      "Multi-page credibility sites for real estate agents, developers, and construction firms.",
+  },
+  {
+    icon: "🔗",
+    title: "Integrations & tools",
+    body:
+      "CRM connections, lead capture, and booking flows — built to slot into your existing stack.",
+  },
+];
+---
+
+<section id="services" class="services">
+  <div class="services__inner">
+    <div class="services__head">
+      <p class="eyebrow">What we build</p>
+      <h2 class="h2">Built for how property actually sells</h2>
+      <p class="services__lead">
+        Three ways we help property businesses turn web traffic into booked calls.
+      </p>
+    </div>
+
+    <div class="services__grid">
+      {
+        services.map((s) => (
+          <article class="card" tabindex="0">
+            <div class="card__icon" aria-hidden="true">{s.icon}</div>
+            <h3 class="card__title">{s.title}</h3>
+            <p class="card__body">{s.body}</p>
+            <a class="card__link" href="/contact">
+              Learn more <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-surface-alt);
+    padding: var(--pad-section) var(--pad-x);
+    scroll-margin-top: 64px;
+  }
+
+  .services__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+
+  .services__head {
+    max-width: var(--prose-max);
+    margin: 0 0 48px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 16px;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+
+  .services__lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    margin: 0;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    transition:
+      box-shadow var(--tx-slow),
+      transform var(--tx-slow),
+      border-color var(--tx-slow);
+    outline: none;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+    border-color: var(--color-manilla);
+  }
+
+  .card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--color-manilla);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .card__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    color: var(--color-charcoal);
+    margin: 0 0 12px;
+  }
+
+  .card__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 24px;
+  }
+
+  .card__link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-link);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card__link:hover {
+    text-decoration: underline;
+  }
+</style>

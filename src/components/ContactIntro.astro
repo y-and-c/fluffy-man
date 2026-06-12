@@ -1,0 +1,202 @@
+---
+// Contact intro — handoff README §"Contact — Layout" (left column)
+const contacts = [
+  {
+    icon: "✉️",
+    label: "Email",
+    value: "hello@yandc.com.au",
+    href: "mailto:hello@yandc.com.au",
+  },
+  {
+    icon: "📞",
+    label: "Phone",
+    value: "+61 07 3129 0410",
+    href: "tel:+61731290410",
+  },
+  {
+    icon: "📍",
+    label: "Where we work",
+    value: "Remote — across Australia",
+    href: null,
+  },
+];
+---
+
+<aside class="intro">
+  <div class="intro__bg" aria-hidden="true"></div>
+  <div class="intro__content">
+    <p class="eyebrow">Get in touch</p>
+    <h1 class="display-h1">Let’s build something that brings in business</h1>
+    <p class="lead">
+      Tell us a little about your property business and what you need. We’ll
+      reply within one business day with clear next steps.
+    </p>
+
+    <ul class="contacts" role="list">
+      {
+        contacts.map((c) => {
+          const inner = (
+            <>
+              <span class="contact__icon" aria-hidden="true">{c.icon}</span>
+              <span class="contact__text">
+                <span class="contact__label">{c.label}</span>
+                <span class="contact__value">{c.value}</span>
+              </span>
+            </>
+          );
+          return (
+            <li class="contact-item">
+              {c.href ? (
+                <a class="contact" href={c.href}>{inner}</a>
+              ) : (
+                <div class="contact contact--static">{inner}</div>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="status" role="status">
+      <span class="status__dot" aria-hidden="true"></span>
+      <span class="status__text">Currently accepting new projects</span>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .intro {
+    position: relative;
+  }
+
+  .intro__bg {
+    position: absolute;
+    top: -12px;
+    left: -8px;
+    right: 40%;
+    bottom: 30%;
+    background-image: radial-gradient(rgba(43, 42, 53, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(150deg, #000, transparent 70%);
+    mask-image: linear-gradient(150deg, #000, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .intro__content {
+    position: relative;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 20px;
+  }
+
+  .display-h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h1-contact);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    font-size: var(--text-lead);
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    max-width: 440px;
+    margin: 0 0 44px;
+  }
+
+  .contacts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-item {
+    margin: 0;
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background var(--tx-fast);
+  }
+
+  .contact:hover {
+    background: var(--color-surface);
+  }
+
+  .contact--static {
+    cursor: default;
+  }
+
+  .contact__icon {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-manilla);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .contact__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact__label {
+    font-size: 13px;
+    color: var(--color-faint);
+  }
+
+  .contact__value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-charcoal);
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: 8px 16px 8px 12px;
+    width: fit-content;
+  }
+
+  .status__dot {
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(31, 164, 99, 0.18);
+  }
+
+  .status__text {
+    font-size: 13px;
+    color: var(--color-charcoal-hover);
+  }
+</style>

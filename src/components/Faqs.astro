@@ -1,0 +1,187 @@
+---
+// FAQ — handoff README §"Homepage — FAQ" and §"FAQ accordion"
+const faqs = [
+  {
+    q: "What types of property businesses do you work with?",
+    a: "Real estate agencies and property managers, residential and commercial developers, and construction firms. If you sell, lease, or build property, we can help.",
+  },
+  {
+    q: "How long does a project take?",
+    a: "A focused landing page can launch in 1–2 weeks. A full multi-page company site typically takes 4–6 weeks from kick-off to launch.",
+  },
+  {
+    q: "Do you work with an existing brand or design?",
+    a: "Yes. We can build to your existing brand and guidelines, or help shape one if you don’t have it nailed down yet.",
+  },
+  {
+    q: "What does “conversion-focused” actually mean?",
+    a: "Every page is built around one job: turning a visitor into a booked call or qualified enquiry. Clear messaging, fast load times, and obvious next steps — no clutter.",
+  },
+  {
+    q: "Do you offer ongoing support after launch?",
+    a: "We do. Most clients keep us on a light retainer for updates, new landing pages, and performance tweaks as campaigns change.",
+  },
+  {
+    q: "How do I get started?",
+    a: "Book a free call. We’ll talk through your goals, your market, and what success looks like — then send a clear proposal. No hard sell.",
+  },
+];
+---
+
+<section id="faqs" class="faqs">
+  <div class="faqs__inner">
+    <h2 class="h2">Questions, answered</h2>
+
+    <ul class="faq-list" role="list" data-faq>
+      {
+        faqs.map((f, i) => {
+          const panelId = `faq-panel-${i}`;
+          const btnId = `faq-btn-${i}`;
+          return (
+            <li class="faq">
+              <button
+                type="button"
+                class="faq__q"
+                id={btnId}
+                aria-expanded="false"
+                aria-controls={panelId}
+                data-faq-trigger
+              >
+                <span class="faq__q-text">{f.q}</span>
+                <span class="faq__icon" aria-hidden="true">+</span>
+              </button>
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={btnId}
+                class="faq__panel"
+                data-faq-panel
+              >
+                <p class="faq__a">{f.a}</p>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-faq]");
+  if (root) {
+    const triggers = root.querySelectorAll<HTMLButtonElement>("[data-faq-trigger]");
+    triggers.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const wasOpen = btn.getAttribute("aria-expanded") === "true";
+        triggers.forEach((other) => {
+          other.setAttribute("aria-expanded", "false");
+          const panel = document.getElementById(
+            other.getAttribute("aria-controls") || "",
+          );
+          if (panel) panel.removeAttribute("data-open");
+        });
+        if (!wasOpen) {
+          btn.setAttribute("aria-expanded", "true");
+          const panel = document.getElementById(
+            btn.getAttribute("aria-controls") || "",
+          );
+          if (panel) panel.setAttribute("data-open", "");
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .faqs {
+    background: var(--color-manilla);
+    padding: var(--pad-section) var(--pad-x);
+    scroll-margin-top: 64px;
+  }
+
+  .faqs__inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 40px;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(43, 42, 53, 0.12);
+  }
+
+  .faq {
+    border-bottom: 1px solid rgba(43, 42, 53, 0.12);
+  }
+
+  .faq__q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 20px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: var(--color-charcoal);
+  }
+
+  .faq__q-text {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-faq-q);
+    line-height: 1.35;
+  }
+
+  .faq__icon {
+    flex: none;
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 300;
+    color: var(--color-charcoal);
+    transition: transform 200ms ease;
+  }
+
+  .faq__q[aria-expanded="true"] .faq__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq__panel {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+      max-height 220ms ease,
+      opacity 200ms ease;
+  }
+
+  .faq__panel[data-open] {
+    max-height: 320px;
+    opacity: 1;
+  }
+
+  .faq__a {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 20px;
+    padding-right: 32px;
+  }
+</style>

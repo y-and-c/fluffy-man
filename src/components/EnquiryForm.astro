@@ -1,0 +1,531 @@
+---
+// Enquiry form — handoff README §"Contact — Enquiry Form" + §"Contact form — validation"
+// + §"Contact form — submit state machine". POSTs JSON to /api/enquiry.
+const topics = [
+  "Landing page",
+  "Company website",
+  "Integrations",
+  "Not sure yet",
+];
+---
+
+<div class="form-card" data-enquiry>
+  <div class="form-card__success" data-success hidden>
+    <div class="success__icon" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        width="30"
+        height="30"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 6 9 17l-5-5"></path>
+      </svg>
+    </div>
+    <h2 class="success__title">Thanks — message received</h2>
+    <p class="success__body">
+      We’ll be in touch within one business day. In the meantime, feel free to
+      reply to the confirmation email with anything else.
+    </p>
+    <button type="button" class="btn btn--ghost" data-reset>Send another</button>
+  </div>
+
+  <form class="form" data-form novalidate>
+    <div class="field">
+      <label class="field__label" for="enq-name">
+        Name <span class="field__required">*</span>
+      </label>
+      <input
+        id="enq-name"
+        name="name"
+        type="text"
+        class="input"
+        placeholder="Jane Smith"
+        autocomplete="name"
+        required
+        data-input="name"
+      />
+      <p class="field__error" data-error="name" hidden>Please enter your name.</p>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="enq-email">
+        Email <span class="field__required">*</span>
+      </label>
+      <input
+        id="enq-email"
+        name="email"
+        type="email"
+        class="input"
+        placeholder="jane@company.com.au"
+        autocomplete="email"
+        required
+        data-input="email"
+      />
+      <p class="field__error" data-error="email" hidden>Please enter your email.</p>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="enq-company">
+        Company <span class="field__optional">(optional)</span>
+      </label>
+      <input
+        id="enq-company"
+        name="company"
+        type="text"
+        class="input"
+        placeholder="Your agency or firm"
+        autocomplete="organization"
+        data-input="company"
+      />
+    </div>
+
+    <div class="field">
+      <span class="field__label">
+        What do you need? <span class="field__optional">(optional)</span>
+      </span>
+      <div class="chips" role="group" aria-label="What do you need?">
+        {
+          topics.map((t) => (
+            <button
+              type="button"
+              class="chip"
+              data-chip
+              data-topic={t}
+              aria-pressed="false"
+            >
+              {t}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="enq-message">
+        Message <span class="field__required">*</span>
+      </label>
+      <textarea
+        id="enq-message"
+        name="message"
+        class="input input--textarea"
+        rows="4"
+        placeholder="Tell us about your business and what you’re looking for…"
+        required
+        data-input="message"></textarea>
+      <p class="field__error" data-error="message" hidden>
+        Please add a short message.
+      </p>
+    </div>
+
+    <p class="form__network-error" data-network-error hidden>
+      Sorry — something went wrong sending your message. Please try again.
+    </p>
+
+    <button type="submit" class="btn btn--submit" data-submit>
+      <span class="btn__label">Send message</span>
+      <span class="btn__spinner" aria-hidden="true"></span>
+    </button>
+
+    <p class="form__fine">
+      By submitting, you agree to be contacted about your enquiry. We never
+      share your details.
+    </p>
+  </form>
+</div>
+
+<script>
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const root = document.querySelector<HTMLElement>("[data-enquiry]");
+  if (root) {
+    const form = root.querySelector<HTMLFormElement>("[data-form]")!;
+    const successPanel = root.querySelector<HTMLElement>("[data-success]")!;
+    const submitBtn = root.querySelector<HTMLButtonElement>("[data-submit]")!;
+    const networkError = root.querySelector<HTMLElement>("[data-network-error]")!;
+    const inputs = {
+      name: root.querySelector<HTMLInputElement>('[data-input="name"]')!,
+      email: root.querySelector<HTMLInputElement>('[data-input="email"]')!,
+      company: root.querySelector<HTMLInputElement>('[data-input="company"]')!,
+      message: root.querySelector<HTMLTextAreaElement>('[data-input="message"]')!,
+    };
+    const errors = {
+      name: root.querySelector<HTMLElement>('[data-error="name"]')!,
+      email: root.querySelector<HTMLElement>('[data-error="email"]')!,
+      message: root.querySelector<HTMLElement>('[data-error="message"]')!,
+    };
+
+    function setError(
+      key: "name" | "email" | "message",
+      msg: string | null,
+    ) {
+      const input = inputs[key];
+      const err = errors[key];
+      if (msg) {
+        err.textContent = msg;
+        err.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.classList.add("input--error");
+      } else {
+        err.hidden = true;
+        input.removeAttribute("aria-invalid");
+        input.classList.remove("input--error");
+      }
+    }
+
+    function validateField(key: "name" | "email" | "message"): boolean {
+      const val = inputs[key].value.trim();
+      if (key === "name") {
+        if (!val) { setError("name", "Please enter your name."); return false; }
+        setError("name", null); return true;
+      }
+      if (key === "email") {
+        if (!val) { setError("email", "Please enter your email."); return false; }
+        if (!EMAIL_RE.test(val)) {
+          setError("email", "Please enter a valid email address.");
+          return false;
+        }
+        setError("email", null); return true;
+      }
+      if (!val) { setError("message", "Please add a short message."); return false; }
+      setError("message", null); return true;
+    }
+
+    (["name", "email", "message"] as const).forEach((key) => {
+      inputs[key].addEventListener("blur", () => validateField(key));
+      inputs[key].addEventListener("input", () => {
+        if (!errors[key].hidden) setError(key, null);
+      });
+    });
+
+    const chips = root.querySelectorAll<HTMLButtonElement>("[data-chip]");
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const pressed = chip.getAttribute("aria-pressed") === "true";
+        chip.setAttribute("aria-pressed", pressed ? "false" : "true");
+      });
+    });
+
+    function setSubmitting(isSubmitting: boolean) {
+      submitBtn.disabled = isSubmitting;
+      submitBtn.toggleAttribute("data-loading", isSubmitting);
+      const label = submitBtn.querySelector<HTMLElement>(".btn__label")!;
+      label.textContent = isSubmitting ? "Sending…" : "Send message";
+    }
+
+    function reset() {
+      form.reset();
+      (["name", "email", "message"] as const).forEach((k) => setError(k, null));
+      chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+      networkError.hidden = true;
+      successPanel.hidden = true;
+      form.hidden = false;
+      inputs.name.focus();
+    }
+
+    root.querySelector<HTMLButtonElement>("[data-reset]")
+      ?.addEventListener("click", reset);
+
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      networkError.hidden = true;
+      const ok =
+        validateField("name") && validateField("email") && validateField("message");
+      if (!ok) return;
+
+      const topics = Array.from(chips)
+        .filter((c) => c.getAttribute("aria-pressed") === "true")
+        .map((c) => c.dataset.topic!)
+        .filter(Boolean);
+
+      setSubmitting(true);
+      try {
+        const res = await fetch("/api/enquiry", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            name: inputs.name.value.trim(),
+            email: inputs.email.value.trim(),
+            company: inputs.company.value.trim(),
+            message: inputs.message.value.trim(),
+            topics,
+          }),
+        });
+        const data = (await res.json().catch(() => ({}))) as {
+          ok?: boolean;
+          error?: string;
+        };
+        if (!res.ok || !data.ok) {
+          networkError.textContent =
+            data.error ||
+            "Sorry — something went wrong sending your message. Please try again.";
+          networkError.hidden = false;
+          setSubmitting(false);
+          return;
+        }
+        form.hidden = true;
+        successPanel.hidden = false;
+        setSubmitting(false);
+      } catch {
+        networkError.textContent =
+          "Sorry — couldn’t reach the server. Please check your connection and try again.";
+        networkError.hidden = false;
+        setSubmitting(false);
+      }
+    });
+  }
+</script>
+
+<style>
+  .form-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-form);
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: var(--shadow-form-card);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-charcoal);
+  }
+
+  .field__required {
+    color: var(--color-error);
+  }
+
+  .field__optional {
+    font-weight: 400;
+    color: var(--color-faint);
+  }
+
+  .input {
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--color-charcoal);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition:
+      border-color var(--tx-fast),
+      box-shadow var(--tx-fast);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input::placeholder {
+    color: var(--color-faint);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-charcoal);
+    box-shadow: 0 0 0 3px rgba(43, 42, 53, 0.08);
+  }
+
+  .input--textarea {
+    min-height: 108px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  .input--error {
+    border-color: var(--color-error);
+  }
+
+  .input--error:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.12);
+  }
+
+  .field__error {
+    font-size: 12.5px;
+    color: var(--color-error);
+    margin: 0;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--color-surface);
+    color: var(--color-charcoal-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition:
+      background var(--tx-fast),
+      color var(--tx-fast),
+      border-color var(--tx-fast);
+  }
+
+  .chip:hover {
+    border-color: var(--color-charcoal);
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--color-charcoal);
+    color: #fff;
+    border-color: var(--color-charcoal);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius-button);
+    border: none;
+    cursor: pointer;
+    transition:
+      background var(--tx-fast),
+      color var(--tx-fast),
+      opacity var(--tx-fast);
+  }
+
+  .btn--submit {
+    background: var(--color-charcoal);
+    color: #fff;
+    padding: 14px 18px;
+    box-shadow: var(--shadow-button);
+  }
+
+  .btn--submit:hover:not(:disabled) {
+    background: var(--color-charcoal-hover);
+  }
+
+  .btn--submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+
+  .btn__spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: ycspin 700ms linear infinite;
+  }
+
+  .btn--submit[data-loading] .btn__spinner {
+    display: inline-block;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-charcoal);
+    border: 1.5px solid var(--color-charcoal);
+    padding: 11px 22px;
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-charcoal);
+    color: #fff;
+  }
+
+  .form__network-error {
+    font-size: 14px;
+    color: var(--color-error);
+    background: rgba(217, 83, 79, 0.08);
+    border: 1px solid rgba(217, 83, 79, 0.3);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0;
+  }
+
+  .form__fine {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--color-faint);
+    text-align: center;
+    margin: 0;
+  }
+
+  .form-card__success {
+    text-align: center;
+    padding: clamp(24px, 5vw, 48px) 8px;
+    animation: ycfade 320ms ease both;
+  }
+
+  .success__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-manilla);
+    color: var(--color-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .success__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--color-charcoal);
+    margin: 0 0 12px;
+  }
+
+  .success__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+    margin: 0 auto 28px;
+    max-width: 380px;
+  }
+
+  @keyframes ycspin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes ycfade {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn__spinner,
+    .form-card__success {
+      animation: none;
+    }
+  }
+</style>
