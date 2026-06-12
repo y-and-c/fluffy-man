@@ -23,10 +23,41 @@ const { variant = "home" } = Astro.props;
             <a href="/#faqs">FAQs</a>
           </div>
           <a href="/contact" class="yc-nav__cta">Let&rsquo;s chat</a>
+          <button
+            type="button"
+            class="yc-nav__burger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="yc-mobile-menu"
+            data-burger
+          >
+            <span class="yc-nav__burger-bar" aria-hidden="true"></span>
+            <span class="yc-nav__burger-bar" aria-hidden="true"></span>
+            <span class="yc-nav__burger-bar" aria-hidden="true"></span>
+          </button>
         </div>
       )
     }
   </div>
+
+  {
+    variant === "home" && (
+      <div
+        id="yc-mobile-menu"
+        class="yc-menu"
+        data-mobile-menu
+        aria-hidden="true"
+        hidden
+      >
+        <div class="yc-menu__inner">
+          <a href="/#services" class="yc-menu__link" data-menu-link>Services</a>
+          <a href="/#why" class="yc-menu__link" data-menu-link>Why Y&amp;C</a>
+          <a href="/#faqs" class="yc-menu__link" data-menu-link>FAQs</a>
+          <a href="/contact" class="yc-menu__cta" data-menu-link>Let&rsquo;s chat</a>
+        </div>
+      </div>
+    )
+  }
 </nav>
 
 <style>
@@ -38,7 +69,6 @@ const { variant = "home" } = Astro.props;
     backdrop-filter: saturate(140%) blur(8px);
     -webkit-backdrop-filter: saturate(140%) blur(8px);
     border-bottom: 1px solid var(--color-border);
-    height: 64px;
     transition: box-shadow var(--tx-fast);
   }
 
@@ -49,7 +79,7 @@ const { variant = "home" } = Astro.props;
   .yc-nav__row {
     max-width: var(--content-max);
     margin: 0 auto;
-    height: 100%;
+    height: 64px;
     padding: 0 var(--pad-x);
     display: flex;
     align-items: center;
@@ -90,12 +120,6 @@ const { variant = "home" } = Astro.props;
     color: var(--color-charcoal);
   }
 
-  @media (max-width: 767px) {
-    .yc-nav__links {
-      display: none;
-    }
-  }
-
   .yc-nav__cta {
     display: inline-flex;
     align-items: center;
@@ -115,6 +139,132 @@ const { variant = "home" } = Astro.props;
   .yc-nav__cta:hover {
     background: var(--color-charcoal-hover);
   }
+
+  .yc-nav__burger {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    margin: -8px;
+    cursor: pointer;
+    color: var(--color-charcoal);
+    border-radius: 6px;
+  }
+
+  .yc-nav__burger:focus-visible {
+    outline: 2px solid var(--color-charcoal);
+    outline-offset: 2px;
+  }
+
+  .yc-nav__burger-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+      transform var(--tx-fast),
+      opacity var(--tx-fast);
+    transform-origin: center;
+  }
+
+  .yc-nav__burger-bar + .yc-nav__burger-bar {
+    margin-top: 5px;
+  }
+
+  .yc-nav__burger[aria-expanded="true"] .yc-nav__burger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .yc-nav__burger[aria-expanded="true"] .yc-nav__burger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .yc-nav__burger[aria-expanded="true"] .yc-nav__burger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 767px) {
+    .yc-nav__links,
+    .yc-nav__cta {
+      display: none;
+    }
+
+    .yc-nav__burger {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .yc-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-nav);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+    pointer-events: none;
+  }
+
+  .yc-menu[data-open] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .yc-menu__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 12px var(--pad-x) 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .yc-menu__link {
+    display: block;
+    padding: 14px 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-charcoal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .yc-menu__cta {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-charcoal);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 22px;
+    border-radius: var(--radius-button);
+    text-decoration: none;
+    box-shadow: var(--shadow-button);
+  }
+
+  @media (min-width: 768px) {
+    .yc-menu {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .yc-menu,
+    .yc-nav__burger-bar {
+      transition: none;
+    }
+  }
 </style>
 
 <script>
@@ -125,5 +275,51 @@ const { variant = "home" } = Astro.props;
     };
     sync();
     window.addEventListener("scroll", sync, { passive: true });
+
+    const burger = nav.querySelector<HTMLButtonElement>("[data-burger]");
+    const menu = nav.querySelector<HTMLElement>("[data-mobile-menu]");
+    const links = nav.querySelectorAll<HTMLAnchorElement>("[data-menu-link]");
+
+    if (burger && menu) {
+      const setOpen = (open: boolean) => {
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+        burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        if (open) {
+          menu.hidden = false;
+          menu.setAttribute("data-open", "");
+          menu.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        } else {
+          menu.removeAttribute("data-open");
+          menu.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+          window.setTimeout(() => {
+            if (burger.getAttribute("aria-expanded") === "false") {
+              menu.hidden = true;
+            }
+          }, 200);
+        }
+      };
+
+      burger.addEventListener("click", () => {
+        setOpen(burger.getAttribute("aria-expanded") !== "true");
+      });
+
+      links.forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") {
+          setOpen(false);
+          burger.focus();
+        }
+      });
+
+      const mq = window.matchMedia("(min-width: 768px)");
+      mq.addEventListener("change", (e) => {
+        if (e.matches) setOpen(false);
+      });
+    }
   }
 </script>
