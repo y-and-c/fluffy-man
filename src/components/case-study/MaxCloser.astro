@@ -1,0 +1,98 @@
+---
+// Closing CTA — Y&C charcoal closer with a secondary "Visit maxproperty.au"
+// link. Sits above the global Footer (rendered by Site layout).
+---
+
+<section class="mx-closer" aria-labelledby="mx-closer-title">
+  <div class="mx-closer__inner">
+    <h2 id="mx-closer-title" class="mx-closer__h2">
+      Want a site that works this hard?
+    </h2>
+    <p class="mx-closer__lead">
+      Book a free call — we’ll reply within one business day.
+    </p>
+    <div class="mx-closer__ctas">
+      <a class="mx-closer__btn" href="/contact">Book a free call</a>
+      <a
+        class="mx-closer__link"
+        href="https://maxproperty.au"
+        target="_blank"
+        rel="noopener">Visit maxproperty.au ↗</a
+      >
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-closer {
+    background: var(--color-charcoal);
+    color: #fff;
+    padding: clamp(64px, 10vw, 104px) var(--pad-x) clamp(56px, 8vw, 88px);
+  }
+
+  .mx-closer__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .mx-closer__h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-h2-cta);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  .mx-closer__lead {
+    font-size: clamp(17px, 2.2vw, 18px);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 36px;
+  }
+
+  .mx-closer__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mx-closer__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-manilla);
+    color: var(--color-charcoal);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: var(--radius-button);
+    text-decoration: none;
+    transition: background var(--tx-fast);
+  }
+
+  .mx-closer__btn:hover {
+    background: var(--color-manilla-hover);
+  }
+
+  .mx-closer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 13px 8px;
+    transition: color var(--tx-fast);
+  }
+
+  .mx-closer__link:hover {
+    color: #fff;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+// § 01 · The brief
+---
+
+<section class="mx-section mx-section--surface">
+  <div class="mx-section__inner">
+    <div class="mx-rail" data-reveal>
+      <div class="mx-rail__marker">
+        <div class="mx-rail__rule" aria-hidden="true"></div>
+        <div class="mx-rail__label">§ 01 · The brief</div>
+      </div>
+      <div class="mx-rail__body">
+        <h2 class="mx-h2">
+          A two-person agency that had to feel <em>substantial</em>.
+        </h2>
+        <p class="mx-prose">
+          Matt was launching a boutique, high-end agency into a market crowded
+          with established franchises. A two-person operation had to look and
+          feel as substantial as the big brands — while staying personal. The
+          site needed to do three jobs at once: win vendor appraisals, surface
+          listings to buyers, and publish a steady stream of market commentary
+          that Matt could manage himself.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-section {
+    padding: clamp(52px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  }
+
+  .mx-section--surface {
+    background: #fff;
+  }
+
+  .mx-section__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .mx-rail {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+
+  @media (max-width: 760px) {
+    .mx-rail {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .mx-rail__rule {
+    width: 26px;
+    height: 2px;
+    background: var(--color-charcoal);
+    margin-bottom: 16px;
+  }
+
+  .mx-rail__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-rail__body {
+    max-width: 680px;
+  }
+
+  .mx-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  .mx-h2 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .mx-prose {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.62;
+    color: var(--color-charcoal-hover);
+    margin: 0;
+  }
+</style>
