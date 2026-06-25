@@ -1,0 +1,585 @@
+---
+// § 03 · The build — craft notes + three browser-frame mocks of
+// maxproperty.au (Buy / Insights / Sell). Mock styling follows Max Property's
+// own design tokens (System B) — kept local to the mocks.
+const notes = [
+  {
+    title: "An editorial design system —",
+    body: "near-monochrome UI, full-colour photography, italic emphasis and section numbering for a premium, considered feel.",
+  },
+  {
+    title: "Conversion-first flows —",
+    body: "appraisal request as the primary action for vendors; browse-properties for buyers; a clear next step on every section.",
+  },
+  {
+    title: "Property listings —",
+    body: "listing pages that drove buyer conversion, reflected well on the agency, and pulled seamlessly from their CRM.",
+  },
+  {
+    title: "Insights content engine —",
+    body: "editorial articles with bespoke “marks” per piece, structured for SEO and self-service publishing.",
+  },
+  {
+    title: "Fast and reliable —",
+    body: "built and deployed for speed, with reliability the agents never have to think about.",
+  },
+];
+---
+
+<section class="mx-section mx-section--surface">
+  <div class="mx-section__inner">
+    <div class="mx-rail mx-rail--top" data-reveal>
+      <div class="mx-rail__marker">
+        <div class="mx-rail__rule" aria-hidden="true"></div>
+        <div class="mx-rail__label">§ 03 · The build</div>
+      </div>
+      <div class="mx-rail__body">
+        <h2 class="mx-h2">What we made it <em>do</em>.</h2>
+        <div>
+          {
+            notes.map((b) => (
+              <div class="mx-note">
+                <div class="mx-note__dash" aria-hidden="true">
+                  —
+                </div>
+                <div>
+                  <span class="mx-note__title">{b.title} </span>
+                  <span class="mx-note__body">{b.body}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-shots" data-reveal>
+      <figure class="mx-shot">
+        <div class="mock mock--card">
+          <div class="mock__chrome mock__chrome--sm">
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mono mock__url--sm">maxproperty.au/buy</span>
+          </div>
+          <div class="mock-buy">
+            <div class="mock-buy__bar">
+              <span class="mock-buy__chip">Noosa Heads</span>
+              <span class="mock-buy__toggle">
+                <span class="mock-buy__toggle-on"></span>
+                <span class="mock-buy__toggle-off"></span>
+              </span>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card__media">
+                <img
+                  src="/case-studies/max-property/11-milpera-retreat-noosa-heads.jpg"
+                  alt="11 Milpera Retreat, Noosa Heads"
+                  loading="lazy"
+                />
+                <span class="mock-card__badge">Sold</span>
+                <span class="mock-card__heart" aria-hidden="true">♡</span>
+              </div>
+              <div class="mock-card__body">
+                <div class="mock-card__price">$1,900,000</div>
+                <div class="mock-card__addr">11 Milpera Retreat</div>
+                <div class="mock-card__suburb">Noosa Heads QLD 4567</div>
+                <div class="mock-card__specs">
+                  <span>3 Bed</span>
+                  <span>2 Bath</span>
+                  <span>2 Car</span>
+                  <span>724m²</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="mx-shot__caption">
+          Property listings — Buy
+        </figcaption>
+      </figure>
+
+      <figure class="mx-shot">
+        <div class="mock mock--card">
+          <div class="mock__chrome mock__chrome--sm">
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mono mock__url--sm">maxproperty.au/insights</span>
+          </div>
+          <div class="mock-ins">
+            <div class="mono mock-ins__overline">§ 05 · Insights</div>
+            <div class="mock-ins__media">
+              <img
+                src="/case-studies/max-property/noosa-heads-coastline.jpg"
+                alt="Noosa Heads coastline and bushland from above"
+                loading="lazy"
+              />
+            </div>
+            <div class="mono mock-ins__cat">Market</div>
+            <div class="mock-ins__title">
+              The Sunshine Coast market in May 2026.
+            </div>
+            <div class="mock-ins__meta">
+              Matt Powe · 12 May 2026 · 6 min read
+            </div>
+          </div>
+        </div>
+        <figcaption class="mx-shot__caption">Insights — article</figcaption>
+      </figure>
+
+      <figure class="mx-shot">
+        <div class="mock mock--card">
+          <div class="mock__chrome mock__chrome--sm">
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mock__dot mock__dot--sm"></span>
+            <span class="mono mock__url--sm">maxproperty.au/sell</span>
+          </div>
+          <div class="mock-sell">
+            <div class="mono mock-sell__overline">
+              § · Request an appraisal
+            </div>
+            <div class="mock-sell__h1">
+              What’s your home <em>worth?</em>
+            </div>
+            <div class="mock-sell__form">
+              <div>
+                <div class="mock-sell__label">Property address</div>
+                <div class="mock-sell__input"></div>
+              </div>
+              <div>
+                <div class="mock-sell__label">Email</div>
+                <div class="mock-sell__input"></div>
+              </div>
+              <div class="mock-sell__btn">
+                Request an appraisal <span aria-hidden="true">→</span>
+              </div>
+              <div class="mock-sell__fine">
+                No obligation · We reply within one business day
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="mx-shot__caption">
+          Appraisal request — Sell
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-section {
+    padding: clamp(52px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  }
+
+  .mx-section--surface {
+    background: #fff;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mx-section__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .mx-rail {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+
+  .mx-rail--top {
+    margin-bottom: clamp(32px, 5vw, 52px);
+  }
+
+  @media (max-width: 760px) {
+    .mx-rail {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .mx-rail__rule {
+    width: 26px;
+    height: 2px;
+    background: var(--color-charcoal);
+    margin-bottom: 16px;
+  }
+
+  .mx-rail__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-rail__body {
+    max-width: 720px;
+  }
+
+  .mx-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 30px;
+    text-wrap: balance;
+  }
+
+  .mx-h2 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .mx-note {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mx-note__dash {
+    color: var(--color-charcoal);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .mx-note__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17.5px;
+    color: var(--color-charcoal);
+  }
+
+  .mx-note__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-shots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  @media (max-width: 860px) {
+    .mx-shots {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .mx-shot {
+    margin: 0;
+  }
+
+  .mx-shot__caption {
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: #9a958a;
+    margin-top: 10px;
+  }
+
+  /* Browser-frame chrome (small) */
+  .mock {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f4ede5;
+  }
+
+  .mock--card {
+    box-shadow: 0 14px 36px -22px rgba(43, 42, 53, 0.35);
+  }
+
+  .mock__chrome--sm {
+    height: 30px;
+    background: var(--color-surface-alt);
+    border-bottom: 1px solid #e6e9ee;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 11px;
+  }
+
+  .mock__dot--sm {
+    width: 7px;
+    height: 7px;
+    border-radius: 100px;
+    background: #d2d7dd;
+  }
+
+  .mock__url--sm {
+    margin-left: 8px;
+    font-size: 9.5px;
+    color: #9aa0a6;
+  }
+
+  .mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Buy mock */
+  .mock-buy {
+    padding: 16px;
+  }
+
+  .mock-buy__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .mock-buy__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Geist", sans-serif;
+    font-size: 10.5px;
+    color: #756e69;
+    background: #fff;
+    border: 1px solid #d5d0cc;
+    border-radius: 100px;
+    padding: 5px 11px;
+  }
+
+  .mock-buy__toggle {
+    display: flex;
+    gap: 5px;
+  }
+
+  .mock-buy__toggle-on {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: #2c1e15;
+  }
+
+  .mock-buy__toggle-off {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #d5d0cc;
+  }
+
+  .mock-card {
+    background: #fff;
+    border: 1px solid #d5d0cc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(42, 30, 21, 0.06);
+  }
+
+  .mock-card__media {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #d5cfc7;
+  }
+
+  .mock-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mock-card__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: "Geist", sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #564c44;
+    border-radius: 4px;
+    padding: 5px 8px;
+  }
+
+  .mock-card__heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #755c4f;
+    font-size: 12px;
+  }
+
+  .mock-card__body {
+    padding: 14px 15px 15px;
+  }
+
+  .mock-card__price {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 21px;
+    line-height: 1.05;
+    color: #1a120c;
+  }
+
+  .mock-card__addr {
+    font-family: "Geist", sans-serif;
+    font-size: 12px;
+    color: #2c1e15;
+    margin-top: 5px;
+  }
+
+  .mock-card__suburb {
+    font-family: "Geist", sans-serif;
+    font-size: 11px;
+    color: #756e69;
+  }
+
+  .mock-card__specs {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #ece7de;
+    font-family: "Geist", sans-serif;
+    font-size: 11px;
+    color: #756e69;
+  }
+
+  /* Insights mock */
+  .mock-ins {
+    padding: 16px;
+  }
+
+  .mock-ins__overline {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #756e69;
+    margin-bottom: 14px;
+  }
+
+  .mock-ins__media {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #d5cfc7;
+  }
+
+  .mock-ins__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mock-ins__cat {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9d4d2a;
+    margin-top: 14px;
+  }
+
+  .mock-ins__title {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 21px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: #1a120c;
+    margin-top: 8px;
+  }
+
+  .mock-ins__meta {
+    font-family: "Geist", sans-serif;
+    font-size: 11px;
+    color: #756e69;
+    margin-top: 12px;
+  }
+
+  /* Sell mock */
+  .mock-sell {
+    padding: 18px 16px;
+  }
+
+  .mock-sell__overline {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #756e69;
+    margin-bottom: 12px;
+  }
+
+  .mock-sell__h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 26px;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: #1a120c;
+    margin-bottom: 18px;
+  }
+
+  .mock-sell__h1 em {
+    font-style: italic;
+    color: #9d4d2a;
+  }
+
+  .mock-sell__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mock-sell__label {
+    font-family: "Geist", sans-serif;
+    font-size: 10px;
+    color: #756e69;
+    margin-bottom: 6px;
+  }
+
+  .mock-sell__input {
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #d5d0cc;
+    background: #fff;
+  }
+
+  .mock-sell__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 36px;
+    border-radius: 8px;
+    background: #9d4d2a;
+    color: #fff;
+    font-family: "Geist", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .mock-sell__fine {
+    font-family: "Geist", sans-serif;
+    font-size: 9.5px;
+    color: #9a8e73;
+    text-align: center;
+  }
+</style>

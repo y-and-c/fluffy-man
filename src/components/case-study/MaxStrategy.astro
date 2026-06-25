@@ -1,0 +1,154 @@
+---
+// § 02 · The strategy
+const points = [
+  {
+    n: "01",
+    title: "Outcome-led positioning",
+    body: "Lead with the client’s result, not the agency’s ego — “Your outcome drives our approach.” Data-led and human-centred throughout.",
+  },
+  {
+    n: "02",
+    title: "Two paths, surfaced immediately",
+    body: "Vendors and buyers want different things, so the architecture splits at the top: Selling and Buying as distinct journeys.",
+  },
+  {
+    n: "03",
+    title: "Proof, not adjectives",
+    body: "Back the confidence with a trust stack — 20+ years combined experience, 500+ properties sold, a 4.9 vendor rating from 180+ reviews, plus realestate.com.au and Google reviews on the page.",
+  },
+  {
+    n: "04",
+    title: "Local authority",
+    body: "“The patches” — Noosaville, Noosa Heads — position the agents as area specialists, not generalists.",
+  },
+  {
+    n: "05",
+    title: "A content engine they own",
+    body: "An editorial “Insights” section with a distinctive visual language, running on a git-based CMS so Matt publishes market notes without a developer in the loop.",
+  },
+];
+---
+
+<section class="mx-section mx-section--alt">
+  <div class="mx-section__inner">
+    <div class="mx-rail" data-reveal>
+      <div class="mx-rail__marker">
+        <div class="mx-rail__rule" aria-hidden="true"></div>
+        <div class="mx-rail__label">§ 02 · The strategy</div>
+      </div>
+      <div class="mx-rail__body">
+        <h2 class="mx-h2">
+          The thinking, before the <em>pixels</em>.
+        </h2>
+        <div class="mx-strategy">
+          {
+            points.map((p) => (
+              <div class="mx-strategy__row">
+                <div class="mx-strategy__n">{p.n}</div>
+                <div>
+                  <h3 class="mx-strategy__title">{p.title}</h3>
+                  <p class="mx-strategy__body">{p.body}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-section {
+    padding: clamp(52px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  }
+
+  .mx-section--alt {
+    background: var(--color-surface-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mx-section__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .mx-rail {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+
+  @media (max-width: 760px) {
+    .mx-rail {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .mx-rail__rule {
+    width: 26px;
+    height: 2px;
+    background: var(--color-charcoal);
+    margin-bottom: 16px;
+  }
+
+  .mx-rail__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-rail__body {
+    max-width: 720px;
+  }
+
+  .mx-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 30px;
+    text-wrap: balance;
+  }
+
+  .mx-h2 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .mx-strategy__row {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mx-strategy__n {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    padding-top: 3px;
+  }
+
+  .mx-strategy__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--color-charcoal);
+    margin: 0 0 8px;
+  }
+
+  .mx-strategy__body {
+    font-size: 15.5px;
+    line-height: 1.58;
+    color: var(--color-charcoal-hover);
+    margin: 0;
+  }
+</style>

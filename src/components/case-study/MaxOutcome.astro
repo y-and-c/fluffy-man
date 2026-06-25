@@ -1,0 +1,288 @@
+---
+// § 04 · The outcome — Manilla section with two headline numbers, the
+// Lighthouse panel, and the Matt Powe pull-quote.
+const lighthouse = [
+  { score: "92", out: "/100", label: "Performance" },
+  { score: "96", out: "/100", label: "Accessibility" },
+  { score: "96", out: "/100", label: "Best practices" },
+  { score: "100", out: "/100", label: "SEO" },
+  { score: "2", out: "/2", label: "Agentic browsing" },
+];
+---
+
+<section class="mx-section mx-section--manilla">
+  <div class="mx-section__inner">
+    <div class="mx-rail" data-reveal>
+      <div class="mx-rail__marker">
+        <div class="mx-rail__rule" aria-hidden="true"></div>
+        <div class="mx-rail__label">§ 04 · The outcome</div>
+      </div>
+      <div class="mx-rail__body">
+        <h2 class="mx-h2">Built to <em>perform</em>.</h2>
+        <p class="mx-frame">What the new site is delivering.</p>
+
+        <div class="mx-outcome">
+          <div class="mx-bignum">
+            <div class="mx-bignum__cell">
+              <div class="mx-bignum__n">+200%</div>
+              <div class="mx-bignum__label">Appraisal enquiries / month</div>
+              <div class="mx-bignum__meta">vs. the previous site</div>
+            </div>
+            <div class="mx-bignum__cell">
+              <div class="mx-bignum__n">16</div>
+              <div class="mx-bignum__label">Insights published since launch</div>
+              <div class="mx-bignum__meta">
+                self-served, no developer in the loop
+              </div>
+            </div>
+          </div>
+
+          <div class="mx-lh">
+            <div class="mx-lh__head">
+              <div class="mx-lh__title">Lighthouse · production</div>
+              <div class="mx-lh__green">
+                <span class="mx-lh__dot" aria-hidden="true"></span>All green
+              </div>
+            </div>
+            <div class="mx-lh__grid">
+              {
+                lighthouse.map((s) => (
+                  <div class="mx-lh__cell">
+                    <div class="mx-lh__row">
+                      <span class="mx-lh__score">{s.score}</span>
+                      <span class="mx-lh__out">{s.out}</span>
+                    </div>
+                    <div class="mx-lh__label">{s.label}</div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <figure class="mx-quote">
+          <blockquote>
+            “Y&amp;C are wizards. I’ve built and run multiple agencies — I wish
+            I’d met them years ago!”
+          </blockquote>
+          <figcaption>Matt Powe · Principal, Max Property</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-section {
+    padding: clamp(52px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  }
+
+  .mx-section--manilla {
+    background: var(--color-manilla);
+  }
+
+  .mx-section__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .mx-rail {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+
+  @media (max-width: 760px) {
+    .mx-rail {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .mx-rail__rule {
+    width: 26px;
+    height: 2px;
+    background: var(--color-charcoal);
+    margin-bottom: 16px;
+  }
+
+  .mx-rail__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-rail__body {
+    max-width: 760px;
+  }
+
+  .mx-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .mx-h2 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .mx-frame {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #7a7468;
+    margin: 0 0 30px;
+  }
+
+  .mx-outcome {
+    margin-bottom: 40px;
+  }
+
+  .mx-bignum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #e6d3ac;
+    border: 1px solid #e6d3ac;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mx-bignum__cell {
+    background: var(--color-manilla);
+    padding: clamp(22px, 3vw, 30px);
+  }
+
+  .mx-bignum__n {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1;
+    color: var(--color-charcoal);
+    letter-spacing: -0.01em;
+  }
+
+  .mx-bignum__label {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--color-charcoal-hover);
+    margin-top: 12px;
+  }
+
+  .mx-bignum__meta {
+    font-size: 12px;
+    color: #7a7468;
+    margin-top: 3px;
+  }
+
+  .mx-lh {
+    background: var(--color-manilla);
+    border: 1px solid #e6d3ac;
+    border-radius: 14px;
+    padding: clamp(20px, 3vw, 28px);
+  }
+
+  .mx-lh__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .mx-lh__title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+
+  .mx-lh__green {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: #3a6b52;
+  }
+
+  .mx-lh__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
+    background: #3a6b52;
+  }
+
+  .mx-lh__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .mx-lh__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .mx-lh__cell {
+    padding-top: 14px;
+    border-top: 1px solid #e6d3ac;
+  }
+
+  .mx-lh__row {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+
+  .mx-lh__score {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3.4vw, 38px);
+    line-height: 1;
+    color: var(--color-charcoal);
+  }
+
+  .mx-lh__out {
+    font-size: 12px;
+    color: #7a7468;
+  }
+
+  .mx-lh__label {
+    font-size: 12px;
+    color: var(--color-charcoal-hover);
+    margin-top: 8px;
+  }
+
+  .mx-quote {
+    margin: 0;
+    border-left: 3px solid var(--color-charcoal);
+    padding: 4px 0 4px 24px;
+  }
+
+  .mx-quote blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(20px, 2.8vw, 26px);
+    line-height: 1.4;
+    color: var(--color-charcoal);
+  }
+
+  .mx-quote figcaption {
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--color-charcoal-hover);
+    margin-top: 16px;
+  }
+</style>

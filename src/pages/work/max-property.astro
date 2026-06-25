@@ -1,0 +1,66 @@
+---
+import Site from "../../layouts/Site.astro";
+import MaxHero from "../../components/case-study/MaxHero.astro";
+import MaxBrief from "../../components/case-study/MaxBrief.astro";
+import MaxStrategy from "../../components/case-study/MaxStrategy.astro";
+import MaxBuild from "../../components/case-study/MaxBuild.astro";
+import MaxOutcome from "../../components/case-study/MaxOutcome.astro";
+import MaxCloser from "../../components/case-study/MaxCloser.astro";
+---
+
+<Site
+  title="Max Property — Y&C case study"
+  description="How Y&C built a boutique Sunshine Coast real-estate agency a website that signals premium credibility, converts vendors and buyers, and lets the team publish market insights without touching code."
+  navVariant="home"
+>
+  <Fragment slot="head">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </Fragment>
+
+  <main>
+    <MaxHero />
+    <MaxBrief />
+    <MaxStrategy />
+    <MaxBuild />
+    <MaxOutcome />
+    <MaxCloser />
+  </main>
+</Site>
+
+<script>
+  const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduce && els.length) {
+    els.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(18px)";
+      el.style.transition = "opacity 620ms ease, transform 620ms ease";
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const target = e.target as HTMLElement;
+              target.style.opacity = "1";
+              target.style.transform = "none";
+              io.unobserve(target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  }
+</script>
