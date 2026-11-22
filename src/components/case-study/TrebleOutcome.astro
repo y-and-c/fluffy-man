@@ -1,0 +1,120 @@
+---
+// § 04 · The outcome — four delivered results (no invented metrics) and the
+// Treble marketing-team pull-quote.
+const results = [
+  {
+    title: "Claude-powered work rhythms",
+    body: "Marketing assets are created automatically — site layouts, project availability and downloadable brochures, and more.",
+  },
+  {
+    title: "GoHighLevel, wired in",
+    body: "Sales and marketing teams work from the same system, so every enquiry has a clear owner.",
+  },
+  {
+    title: "A faster stack",
+    body: "A performant build, quicker than their previous sites.",
+  },
+  {
+    title: "End to end",
+    body: "Strategy, design, development and integration with all their tools, delivered by one team.",
+  },
+];
+---
+
+<section class="tr-section tr-section--manilla">
+  <div class="tr-section__inner">
+    <div class="tr-rail" data-reveal>
+      <div class="tr-rail__marker">
+        <div class="tr-rail__rule" aria-hidden="true"></div>
+        <div class="tr-rail__label">§ 04 · The outcome</div>
+      </div>
+      <div class="tr-rail__body">
+        <h2 class="tr-h2 tr-h2--tight">Built to <em>work</em>.</h2>
+        <p class="tr-frame">What the new site is delivering.</p>
+
+        <div class="tr-results">
+          {
+            results.map((r) => (
+              <div class="tr-results__cell">
+                <div class="tr-results__title">{r.title}</div>
+                <p class="tr-results__body">{r.body}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <figure class="tr-quote">
+          <blockquote>
+            “This was a tricky project as we didn’t have a Brand ID or much to
+            work with, speed was also critical, Y&amp;C turned it around
+            quickly and well within budget”
+          </blockquote>
+          <figcaption>Harriet · Marketing Team, Treble Property Group</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tr-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #e6d3ac;
+    border: 1px solid #e6d3ac;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 560px) {
+    .tr-results {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tr-results__cell {
+    background: var(--color-manilla);
+    padding: clamp(22px, 3vw, 30px);
+  }
+
+  .tr-results__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(22px, 2.8vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+  }
+
+  .tr-results__body {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-charcoal-hover);
+    margin: 12px 0 0;
+  }
+
+  .tr-quote {
+    margin: 0;
+    border-left: 3px solid var(--color-charcoal);
+    padding: 4px 0 4px 24px;
+  }
+
+  .tr-quote blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(20px, 2.8vw, 26px);
+    line-height: 1.4;
+    color: var(--color-charcoal);
+  }
+
+  .tr-quote figcaption {
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--color-charcoal-hover);
+    margin-top: 16px;
+  }
+</style>

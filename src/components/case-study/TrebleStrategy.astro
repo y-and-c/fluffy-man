@@ -1,0 +1,92 @@
+---
+// § 02 · The strategy
+const points = [
+  {
+    n: "01",
+    title: "Brand before pixels",
+    body: "With no brand identity to start from, strategy and design set the tone and visual language first — confident, measured and relationship-led.",
+  },
+  {
+    n: "02",
+    title: "Audience-first paths",
+    body: "Landowners, investors, capital partners and buyers want different things, so the site routes each of them to the right next step.",
+  },
+  {
+    n: "03",
+    title: "Projects as proof",
+    body: "Live work leads the page. Each location gets its own illustrated card with its type and status — current, coming soon or under way.",
+  },
+  {
+    n: "04",
+    title: "Lot-level clarity",
+    body: "Price, area, frontage and registration date sit beside an annotated site plan, so a buyer can judge a lot without picking up the phone.",
+  },
+  {
+    n: "05",
+    title: "A marketing engine that runs itself",
+    body: "Claude and GoHighLevel are wired in so brochures, availability and layouts update with the work, and sales and marketing share one view.",
+  },
+];
+---
+
+<section class="tr-section tr-section--alt">
+  <div class="tr-section__inner">
+    <div class="tr-rail" data-reveal>
+      <div class="tr-rail__marker">
+        <div class="tr-rail__rule" aria-hidden="true"></div>
+        <div class="tr-rail__label">§ 02 · The strategy</div>
+      </div>
+      <div class="tr-rail__body">
+        <h2 class="tr-h2">
+          The thinking, before the <em>pixels</em>.
+        </h2>
+        <div>
+          {
+            points.map((p) => (
+              <div class="tr-strategy__row">
+                <div class="tr-strategy__n">{p.n}</div>
+                <div>
+                  <h3 class="tr-strategy__title">{p.title}</h3>
+                  <p class="tr-strategy__body">{p.body}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tr-strategy__row {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tr-strategy__n {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    padding-top: 3px;
+  }
+
+  .tr-strategy__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--color-charcoal);
+    margin: 0 0 8px;
+  }
+
+  .tr-strategy__body {
+    font-size: 15.5px;
+    line-height: 1.58;
+    color: var(--color-charcoal-hover);
+    margin: 0;
+  }
+</style>

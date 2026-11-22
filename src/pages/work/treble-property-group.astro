@@ -1,0 +1,148 @@
+---
+import Site from "../../layouts/Site.astro";
+import TrebleHero from "../../components/case-study/TrebleHero.astro";
+import TrebleBrief from "../../components/case-study/TrebleBrief.astro";
+import TrebleStrategy from "../../components/case-study/TrebleStrategy.astro";
+import TrebleBuild from "../../components/case-study/TrebleBuild.astro";
+import TrebleOutcome from "../../components/case-study/TrebleOutcome.astro";
+import TrebleCloser from "../../components/case-study/TrebleCloser.astro";
+---
+
+<Site
+  title="Treble Property Group — Y&C case study"
+  description="How Y&C built Treble Property Group — a new Queensland development business with no brand identity — a fast, credible website integrated with Claude and GoHighLevel, delivered end to end and well within budget."
+  navVariant="home"
+>
+  <Fragment slot="head">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </Fragment>
+
+  <main>
+    <TrebleHero />
+    <TrebleBrief />
+    <TrebleStrategy />
+    <TrebleBuild />
+    <TrebleOutcome />
+    <TrebleCloser />
+  </main>
+</Site>
+
+<script>
+  const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduce && els.length) {
+    els.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(18px)";
+      el.style.transition = "opacity 620ms ease, transform 620ms ease";
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const target = e.target as HTMLElement;
+              target.style.opacity = "1";
+              target.style.transform = "none";
+              io.unobserve(target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  }
+</script>
+
+<style is:global>
+  .tr-section {
+    padding: clamp(52px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  }
+  .tr-section--surface {
+    background: #fff;
+  }
+  .tr-section--ruled {
+    border-top: 1px solid var(--color-border);
+  }
+  .tr-section--alt {
+    background: var(--color-surface-alt);
+    border-top: 1px solid var(--color-border);
+  }
+  .tr-section--manilla {
+    background: var(--color-manilla);
+  }
+  .tr-section__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .tr-rail {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+  .tr-rail--top {
+    margin-bottom: clamp(32px, 5vw, 52px);
+  }
+  @media (max-width: 760px) {
+    .tr-rail {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+  .tr-rail__rule {
+    width: 26px;
+    height: 2px;
+    background: var(--color-charcoal);
+    margin-bottom: 16px;
+  }
+  .tr-rail__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+  }
+  .tr-rail__body {
+    max-width: 720px;
+  }
+  .tr-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal);
+    margin: 0 0 30px;
+    text-wrap: balance;
+  }
+  .tr-h2--tight {
+    margin-bottom: 10px;
+  }
+  .tr-h2 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .tr-prose {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.62;
+    color: var(--color-charcoal-hover);
+    margin: 0;
+  }
+  .tr-frame {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #7a7468;
+    margin: 0 0 30px;
+  }
+</style>
