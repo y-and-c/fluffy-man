@@ -1,0 +1,485 @@
+---
+// § 03 · The build — craft notes + three browser-frame mocks of
+// treblegroup.com.au (For sale / Projects / Enquiry). Copy in the mocks is
+// from the live site; the palette is a neutral placeholder.
+const notes = [
+  {
+    title: "Brand-light start —",
+    body: "with no Brand ID to work from, the visual language and tone were set as the site was built: a restrained palette, italic emphasis and clear hierarchy.",
+  },
+  {
+    title: "Hero video —",
+    body: "a full-bleed hero with a separate mobile cut, so the first impression holds up on any device.",
+  },
+  {
+    title: "Project cards —",
+    body: "an illustrated line-art card for every location, giving four very different projects one consistent look.",
+  },
+  {
+    title: "Lot listings —",
+    body: "price, area, frontage and registration date alongside annotated site plans, with availability kept current through Claude-driven workflows.",
+  },
+  {
+    title: "Enquiries that go somewhere —",
+    body: "a clear enquiry form with an agent profile and privacy notice, connected to GoHighLevel so sales and marketing see the same leads.",
+  },
+];
+
+const lot = {
+  status: "Available",
+  title: "Lot 2",
+  where: "Land · Buderim",
+  price: "$610,000",
+  specs: ["187 m²", "7.1 m frontage"],
+  note: "Registration expected December 2026",
+};
+
+const projects = [
+  { name: "Parkside Buderim", type: "Land estate · Buderim", status: "Current" },
+  { name: "Burpengary", type: "Residential · Burpengary", status: "Coming soon" },
+  { name: "Hervey Bay", type: "Residential · Hervey Bay", status: "Coming soon" },
+  { name: "Banya", type: "Industrial · Banya", status: "Current" },
+];
+---
+
+<section class="tr-section tr-section--surface tr-section--ruled">
+  <div class="tr-section__inner">
+    <div class="tr-rail tr-rail--top" data-reveal>
+      <div class="tr-rail__marker">
+        <div class="tr-rail__rule" aria-hidden="true"></div>
+        <div class="tr-rail__label">§ 03 · The build</div>
+      </div>
+      <div class="tr-rail__body">
+        <h2 class="tr-h2">What we made it <em>do</em>.</h2>
+        <div>
+          {
+            notes.map((b) => (
+              <div class="tr-note">
+                <div class="tr-note__dash" aria-hidden="true">
+                  —
+                </div>
+                <div>
+                  <span class="tr-note__title">{b.title} </span>
+                  <span class="tr-note__body">{b.body}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="tr-shots" data-reveal>
+      <figure class="tr-shot">
+        <div class="tr-mock tr-mock--card">
+          <div class="tr-mock__chrome tr-mock__chrome--sm">
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mono tr-mock__url--sm">treblegroup.com.au</span>
+          </div>
+          <div class="tr-lot">
+            <div class="tr-lot__plan" aria-hidden="true">
+              <span class="tr-lot__cell"></span>
+              <span class="tr-lot__cell"></span>
+              <span class="tr-lot__cell tr-lot__cell--on"></span>
+              <span class="tr-lot__cell"></span>
+              <span class="tr-lot__tag tr-mono">Site plan</span>
+            </div>
+            <div class="tr-lot__body">
+              <div class="tr-lot__row">
+                <span class="tr-lot__title">{lot.title}</span>
+                <span class="tr-lot__status">{lot.status}</span>
+              </div>
+              <div class="tr-lot__where">{lot.where}</div>
+              <div class="tr-lot__price">{lot.price}</div>
+              <div class="tr-lot__specs">
+                {lot.specs.map((s) => <span>{s}</span>)}
+              </div>
+              <div class="tr-lot__note">{lot.note}</div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="tr-shot__caption">Lot listings — For sale</figcaption>
+      </figure>
+
+      <figure class="tr-shot">
+        <div class="tr-mock tr-mock--card">
+          <div class="tr-mock__chrome tr-mock__chrome--sm">
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mono tr-mock__url--sm">treblegroup.com.au</span>
+          </div>
+          <div class="tr-proj">
+            <div class="tr-proj__overline tr-mono">Current projects</div>
+            {
+              projects.map((p) => (
+                <div class="tr-proj__row">
+                  <div>
+                    <div class="tr-proj__name">{p.name}</div>
+                    <div class="tr-proj__type">{p.type}</div>
+                  </div>
+                  <span
+                    class:list={[
+                      "tr-proj__status",
+                      { "tr-proj__status--soon": p.status === "Coming soon" },
+                    ]}
+                  >
+                    {p.status}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <figcaption class="tr-shot__caption">Projects — cards</figcaption>
+      </figure>
+
+      <figure class="tr-shot">
+        <div class="tr-mock tr-mock--card">
+          <div class="tr-mock__chrome tr-mock__chrome--sm">
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mock__dot tr-mock__dot--sm"></span>
+            <span class="tr-mono tr-mock__url--sm">treblegroup.com.au</span>
+          </div>
+          <div class="tr-enq">
+            <div class="tr-enq__overline tr-mono">§ · Enquire now</div>
+            <div class="tr-enq__h1">Enquire <em>now</em></div>
+            <div class="tr-enq__agent">
+              <span class="tr-enq__avatar" aria-hidden="true"></span>
+              <span>New Home Specialist</span>
+            </div>
+            <div class="tr-enq__form">
+              <div>
+                <div class="tr-enq__label">Name</div>
+                <div class="tr-enq__input"></div>
+              </div>
+              <div>
+                <div class="tr-enq__label">Email</div>
+                <div class="tr-enq__input"></div>
+              </div>
+              <div class="tr-enq__btn">
+                Enquire now <span aria-hidden="true">→</span>
+              </div>
+              <div class="tr-enq__fine">Privacy notice included</div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="tr-shot__caption">Enquiry — Contact</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tr-note {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tr-note__dash {
+    color: var(--color-charcoal);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .tr-note__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17.5px;
+    color: var(--color-charcoal);
+  }
+
+  .tr-note__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-charcoal-hover);
+  }
+
+  .tr-shots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  @media (max-width: 860px) {
+    .tr-shots {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tr-shot {
+    margin: 0;
+  }
+
+  .tr-shot__caption {
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: #9a958a;
+    margin-top: 10px;
+  }
+
+  .tr-mock {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f1ec;
+  }
+
+  .tr-mock--card {
+    box-shadow: 0 14px 36px -22px rgba(43, 42, 53, 0.35);
+  }
+
+  .tr-mock__chrome--sm {
+    height: 30px;
+    background: var(--color-surface-alt);
+    border-bottom: 1px solid #e6e9ee;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 11px;
+  }
+
+  .tr-mock__dot--sm {
+    width: 7px;
+    height: 7px;
+    border-radius: 100px;
+    background: #d2d7dd;
+  }
+
+  .tr-mock__url--sm {
+    margin-left: 8px;
+    font-size: 9.5px;
+    color: #9aa0a6;
+  }
+
+  .tr-mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Lot card */
+  .tr-lot__plan {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 18px;
+    background: #e7e3da;
+    aspect-ratio: 16 / 10;
+    align-content: center;
+  }
+
+  .tr-lot__cell {
+    height: 46px;
+    border: 1px solid #b9b3a4;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .tr-lot__cell--on {
+    background: #d6c29a;
+    border-color: #1d2427;
+  }
+
+  .tr-lot__tag {
+    position: absolute;
+    left: 14px;
+    bottom: 10px;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #756e69;
+  }
+
+  .tr-lot__body {
+    padding: 16px 18px 20px;
+    font-family: "Geist", sans-serif;
+  }
+
+  .tr-lot__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .tr-lot__title {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 24px;
+    color: #1d2427;
+  }
+
+  .tr-lot__status {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #1d2427;
+    background: #d6c29a;
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  .tr-lot__where {
+    font-size: 11.5px;
+    color: #756e69;
+    margin-top: 2px;
+  }
+
+  .tr-lot__price {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    color: #1d2427;
+    margin-top: 12px;
+  }
+
+  .tr-lot__specs {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    color: #2c383c;
+    margin-top: 8px;
+  }
+
+  .tr-lot__note {
+    font-size: 10.5px;
+    color: #756e69;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd8cc;
+  }
+
+  /* Projects */
+  .tr-proj {
+    padding: 18px;
+    font-family: "Geist", sans-serif;
+  }
+
+  .tr-proj__overline {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #756e69;
+    margin-bottom: 8px;
+  }
+
+  .tr-proj__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px solid #ddd8cc;
+  }
+
+  .tr-proj__name {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 21px;
+    color: #1d2427;
+    line-height: 1.1;
+  }
+
+  .tr-proj__type {
+    font-size: 11px;
+    color: #756e69;
+    margin-top: 3px;
+  }
+
+  .tr-proj__status {
+    flex: none;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #1d2427;
+    background: #d6c29a;
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  .tr-proj__status--soon {
+    background: transparent;
+    border: 1px solid #b9b3a4;
+    color: #2c383c;
+  }
+
+  /* Enquiry */
+  .tr-enq {
+    padding: 22px 18px 24px;
+    font-family: "Geist", sans-serif;
+  }
+
+  .tr-enq__overline {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #756e69;
+  }
+
+  .tr-enq__h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 28px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: #1d2427;
+    margin-top: 10px;
+  }
+
+  .tr-enq__h1 em {
+    font-style: italic;
+  }
+
+  .tr-enq__agent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #2c383c;
+    margin-top: 14px;
+  }
+
+  .tr-enq__avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    background: #d6c29a;
+  }
+
+  .tr-enq__form {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .tr-enq__label {
+    font-size: 10.5px;
+    color: #756e69;
+    margin-bottom: 5px;
+  }
+
+  .tr-enq__input {
+    height: 30px;
+    border: 1px solid #cfc9bb;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .tr-enq__btn {
+    display: inline-flex;
+    justify-content: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #f3f1ec;
+    background: #1d2427;
+    border-radius: 8px;
+    padding: 10px 16px;
+  }
+
+  .tr-enq__fine {
+    font-size: 10.5px;
+    color: #756e69;
+  }
+</style>

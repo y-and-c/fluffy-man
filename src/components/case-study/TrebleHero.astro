@@ -1,0 +1,437 @@
+---
+// Case study — hero. Y&C page chrome wrapping a treblegroup.com.au home mock.
+// Copy in the mock is taken from the live site. The mock palette is a neutral
+// placeholder (Treble's tokens weren't available) — swap the --tb-* values
+// below for the real brand colours.
+const stats = [
+  { n: "10+", label: "Years of development experience" },
+  { n: "4", label: "Projects", meta: "residential, land and industrial" },
+  { n: "3", label: "Lots at Parkside Buderim", meta: "152–200 m²" },
+  { n: "Dec 2026", label: "Registration expected", last: true },
+];
+---
+
+<header class="tr-hero">
+  <div class="tr-hero__texture" aria-hidden="true"></div>
+  <div class="tr-hero__inner">
+    <div class="tr-hero__copy" data-reveal>
+      <p class="tr-hero__eyebrow">Case study · Property development</p>
+      <h1 class="tr-hero__h1">
+        Treble Property Group — a development business, <em>built</em> on
+        delivery.
+      </h1>
+      <p class="tr-hero__sub">
+        A new Sunshine Coast developer, grown out of Thompson Projects, needed
+        a site that earns trust from landowners, investors and partners, shows
+        live projects and lots, and turns interest into enquiries — fast, and
+        without a brand to start from.
+      </p>
+    </div>
+
+    <div class="tr-hero__meta" data-reveal>
+      <span>Sunshine Coast, QLD</span>
+      <span class="tr-hero__dot" aria-hidden="true">·</span>
+      <span>Website, brand &amp; integrations</span>
+      <span class="tr-hero__dot" aria-hidden="true">·</span>
+      <span>Year 2026</span>
+      <span class="tr-hero__dot" aria-hidden="true">·</span>
+      <a
+        href="https://treblegroup.com.au"
+        target="_blank"
+        rel="noopener"
+        class="tr-hero__link">treblegroup.com.au ↗</a
+      >
+    </div>
+
+    <figure class="tr-hero__figure" data-reveal>
+      <div class="tr-mock tr-mock--hero">
+        <div class="tr-mock__chrome">
+          <span class="tr-mock__dot"></span>
+          <span class="tr-mock__dot"></span>
+          <span class="tr-mock__dot"></span>
+          <span class="tr-mock__url tr-mono">treblegroup.com.au</span>
+        </div>
+
+        <div class="tr-mhero">
+          <div class="tr-mhero__nav">
+            <span class="tr-mhero__brand">Treble</span>
+            <div class="tr-mhero__navlinks">
+              <span>For sale</span>
+              <span>Projects</span>
+              <span>About</span>
+              <span>Contact</span>
+            </div>
+            <span class="tr-mhero__navcta">Enquire now</span>
+          </div>
+
+          <div class="tr-mhero__content">
+            <div class="tr-mhero__overline tr-mono">
+              Property group · Queensland
+            </div>
+            <div class="tr-mhero__h1">
+              Creating <em>opportunities</em> through property
+            </div>
+            <p class="tr-mhero__sub">
+              Treble Property Group identifies, acquires and delivers property
+              opportunities across Queensland.
+            </p>
+            <div class="tr-mhero__ctas">
+              <span class="tr-btn tr-btn--solid">
+                Current projects <span aria-hidden="true">→</span>
+              </span>
+              <span class="tr-btn tr-btn--ghost">
+                Contact us <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tr-proofbar">
+          {
+            stats.map((s) => (
+              <div
+                class:list={[
+                  "tr-proofbar__cell",
+                  { "tr-proofbar__cell--last": s.last },
+                ]}
+              >
+                <div class="tr-proofbar__n">{s.n}</div>
+                <div class="tr-proofbar__label">{s.label}</div>
+                {s.meta && <div class="tr-proofbar__meta">{s.meta}</div>}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <figcaption class="tr-hero__caption">
+        Mock — treblegroup.com.au home
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<style>
+  .tr-hero {
+    position: relative;
+    background: var(--color-manilla);
+    padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 72px)
+      clamp(40px, 6vw, 72px);
+    overflow: hidden;
+  }
+
+  .tr-hero__texture {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      rgba(43, 42, 53, 0.07) 1px,
+      transparent 1px
+    );
+    background-size: 26px 26px;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 26%,
+      #000 74%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 26%,
+      #000 74%,
+      transparent
+    );
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .tr-hero__inner {
+    position: relative;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .tr-hero__copy {
+    max-width: 840px;
+  }
+
+  .tr-hero__eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-hover);
+    margin: 0 0 24px;
+  }
+
+  .tr-hero__h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--color-charcoal);
+    margin: 0 0 26px;
+    text-wrap: balance;
+  }
+
+  .tr-hero__h1 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .tr-hero__sub {
+    font-size: clamp(17px, 2.2vw, 20px);
+    line-height: 1.55;
+    color: var(--color-charcoal-hover);
+    max-width: 660px;
+    margin: 0;
+  }
+
+  .tr-hero__meta {
+    margin: clamp(26px, 4vw, 38px) 0 clamp(28px, 4vw, 44px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    font-size: 13px;
+    color: var(--color-charcoal-hover);
+  }
+
+  .tr-hero__dot {
+    color: var(--color-charcoal);
+  }
+
+  .tr-hero__link {
+    color: var(--color-charcoal);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(43, 42, 53, 0.4);
+    padding-bottom: 1px;
+  }
+
+  .tr-hero__figure {
+    margin: 0;
+  }
+
+  .tr-hero__caption {
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: #9a958a;
+    margin-top: 12px;
+  }
+
+  /* Browser-frame mock — Y&C-side chrome */
+  .tr-mock {
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .tr-mock--hero {
+    box-shadow: 0 24px 60px -28px rgba(43, 42, 53, 0.4);
+  }
+
+  .tr-mock__chrome {
+    height: 36px;
+    background: var(--color-surface-alt);
+    border-bottom: 1px solid #e6e9ee;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 14px;
+  }
+
+  .tr-mock__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 100px;
+    background: #d2d7dd;
+  }
+
+  .tr-mock__url {
+    margin-left: 10px;
+    background: #fff;
+    border: 1px solid #e6e9ee;
+    border-radius: 100px;
+    font-size: 10.5px;
+    color: #9aa0a6;
+    padding: 3px 12px;
+  }
+
+  .tr-mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Mock content — placeholder palette (swap for Treble's tokens) */
+  .tr-mhero {
+    --tb-ink: #1d2427;
+    --tb-ink-2: #2c383c;
+    --tb-paper: #f3f1ec;
+    --tb-accent: #d6c29a;
+    position: relative;
+    background: linear-gradient(168deg, var(--tb-ink-2) 0%, var(--tb-ink) 70%);
+    padding: clamp(15px, 1.8vw, 20px) clamp(18px, 2.6vw, 34px)
+      clamp(28px, 4.5vw, 52px);
+  }
+
+  .tr-mhero__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .tr-mhero__brand {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--tb-paper);
+  }
+
+  .tr-mhero__navlinks {
+    display: flex;
+    align-items: center;
+    gap: clamp(11px, 1.5vw, 20px);
+  }
+
+  .tr-mhero__navlinks span {
+    font-size: 11.5px;
+    color: rgba(243, 241, 236, 0.85);
+  }
+
+  @media (max-width: 720px) {
+    .tr-mhero__navlinks {
+      display: none;
+    }
+  }
+
+  .tr-mhero__navcta {
+    flex: none;
+    font-size: 10.5px;
+    color: var(--tb-ink);
+    background: var(--tb-accent);
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+
+  .tr-mhero__content {
+    padding-top: clamp(38px, 8vw, 92px);
+    max-width: 600px;
+  }
+
+  .tr-mhero__overline {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.7);
+    margin-bottom: clamp(16px, 2.4vw, 26px);
+  }
+
+  .tr-mhero__h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(34px, 6vw, 66px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--tb-paper);
+  }
+
+  .tr-mhero__h1 em {
+    font-style: italic;
+    color: var(--tb-accent);
+  }
+
+  .tr-mhero__sub {
+    margin: clamp(16px, 2.4vw, 24px) 0 0;
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: clamp(12px, 1.5vw, 15px);
+    line-height: 1.5;
+    color: rgba(243, 241, 236, 0.85);
+    max-width: 380px;
+  }
+
+  .tr-mhero__ctas {
+    margin-top: clamp(18px, 2.6vw, 30px);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: "Geist", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 16px;
+  }
+
+  .tr-btn--solid {
+    color: var(--tb-ink);
+    background: var(--tb-accent);
+  }
+
+  .tr-btn--ghost {
+    color: var(--tb-paper);
+    border: 1px solid rgba(243, 241, 236, 0.3);
+  }
+
+  /* Proof bar */
+  .tr-proofbar {
+    background: #fff;
+    border-top: 1px solid #e2ddd4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 560px) {
+    .tr-proofbar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .tr-proofbar__cell {
+    padding: clamp(18px, 2.4vw, 26px) clamp(16px, 2vw, 24px);
+    border-right: 1px solid #ece7de;
+  }
+
+  .tr-proofbar__cell--last {
+    border-right: 0;
+  }
+
+  @media (max-width: 560px) {
+    .tr-proofbar__cell:nth-child(2n) {
+      border-right: 0;
+    }
+    .tr-proofbar__cell:nth-child(-n + 2) {
+      border-bottom: 1px solid #ece7de;
+    }
+  }
+
+  .tr-proofbar__n {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: clamp(26px, 3.6vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #1d2427;
+  }
+
+  .tr-proofbar__label {
+    margin-top: 8px;
+    font-family: "Geist", sans-serif;
+    font-size: 11.5px;
+    line-height: 1.35;
+    color: #2c383c;
+  }
+
+  .tr-proofbar__meta {
+    font-family: "Geist", sans-serif;
+    font-size: 10.5px;
+    color: #756e69;
+    margin-top: 2px;
+  }
+</style>
